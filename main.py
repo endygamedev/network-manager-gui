@@ -8,7 +8,7 @@ class App(tk.Tk):
         super().__init__(*args, **kwargs)
 
         self.title("NetworkManager")
-        self.geometry('350x360')
+        self.geometry("350x360")
         self.resizable(False, False)
         self.gui()
         self.btnRefresh_Event()
