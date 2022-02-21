@@ -11,7 +11,7 @@ install:
 	chmod +x $(TARGET)
 	install $(TARGET) $(PREFIX)
 	mkdir $(ASSETS)/network-manager-gui
-	cp main.py $(ASSETS)/network-manager-gui/
+	cp ./src/main.py $(ASSETS)/network-manager-gui/
 
 uninstall:
 	sudo rm -rf $(PREFIX)/$(TARGET)
