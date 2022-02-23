@@ -89,16 +89,20 @@ class App(tk.Tk):
             :return: `side effect`: button event
             :rtype: None
         """
-        self._lstAll.delete(0, tk.END)
-        processNM = sp.Popen(["nmcli", "-f", "SSID", "device", "wifi"], stdout=sp.PIPE)
-        processCut = sp.Popen(["sed", "1d"], stdin=processNM.stdout, stdout=sp.PIPE)
-        while True:
-            line = processCut.stdout.readline()
-            if line != b'':
-                self._lstAll.insert(tk.END, line.rstrip())
-            else:
-                break
-        self.selectItem()
+        try:
+            self._lstAll.delete(0, tk.END)
+            processNM = sp.Popen(["nmcli", "-f", "SSID", "device", "wifi"], stdout=sp.PIPE)
+            processCut = sp.Popen(["sed", "1d"], stdin=processNM.stdout, stdout=sp.PIPE)
+            while True:
+                line = processCut.stdout.readline()
+                if line != b'':
+                    self._lstAll.insert(tk.END, line.rstrip())
+                else:
+                    break
+            self.selectItem()
+        except:
+            messagebox.showerror("Error", "Something went wrong :(")
+
 
     def btnConnect_Event(self):
         """ Button event for `btnConnect`
@@ -106,16 +110,19 @@ class App(tk.Tk):
             :return: `side effect`: button event
             :rtype: None
         """
-        name = self._entryName.get().strip()
-        password = self._entryPassword.get().strip()
-        if password == "":
-            proc = sp.Popen(["nmcli", "device", "wifi", "connect", name], stdout=sp.PIPE, stderr=sp.PIPE)
-        else:
-            proc = sp.Popen(["nmcli", "device", "wifi", "connect", name, "password", password], stdout=sp.PIPE, stderr=sp.PIPE)
-        res = proc.communicate()
-        out = res[0]
-        err = res[1]
-        self.message(err, out)
+        try:
+            name = self._entryName.get().strip()
+            password = self._entryPassword.get().strip()
+            if password == "":
+                proc = sp.Popen(["nmcli", "device", "wifi", "connect", name], stdout=sp.PIPE, stderr=sp.PIPE)
+            else:
+                proc = sp.Popen(["nmcli", "device", "wifi", "connect", name, "password", password], stdout=sp.PIPE, stderr=sp.PIPE)
+            res = proc.communicate()
+            out = res[0]
+            err = res[1]
+            self.message(err, out)
+        except:
+            messagebox.showerror("Error", "Something went wrong :(")
 
     def btnDisconnect_Event(self):
         """ Button event for `btnDisconnect`
@@ -123,15 +130,18 @@ class App(tk.Tk):
             :return: `side effect`: button event
             :rtype: None
         """
-        procIW = sp.Popen(["iw", "dev"], stdout=sp.PIPE)
-        procGrep = sp.Popen(["grep", "Interface"], stdin=procIW.stdout, stdout=sp.PIPE)
-        procInterface = sp.Popen(["cut", "-d", " ", "-f", "2"], stdin=procGrep.stdout, stdout=sp.PIPE)
-        interface = procInterface.communicate()[0]
-        procDisconnect = sp.Popen(["nmcli", "device", "disconnect", interface.decode("ASCII").strip()], stdout=sp.PIPE, stderr=sp.PIPE)
-        res = procDisconnect.communicate()
-        out = res[0]
-        err = res[1]
-        self.message(err, out)
+        try:
+            procIW = sp.Popen(["iw", "dev"], stdout=sp.PIPE)
+            procGrep = sp.Popen(["grep", "Interface"], stdin=procIW.stdout, stdout=sp.PIPE)
+            procInterface = sp.Popen(["cut", "-d", " ", "-f", "2"], stdin=procGrep.stdout, stdout=sp.PIPE)
+            interface = procInterface.communicate()[0]
+            procDisconnect = sp.Popen(["nmcli", "device", "disconnect", interface.decode("ASCII").strip()], stdout=sp.PIPE, stderr=sp.PIPE)
+            res = procDisconnect.communicate()
+            out = res[0]
+            err = res[1]
+            self.message(err, out)
+        except:
+            messagebox.showerror("Error", "Something went wrong :(")
 
     def btnClose_Event(self):
         """ Button event for `btnClose`
