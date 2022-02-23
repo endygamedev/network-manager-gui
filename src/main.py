@@ -157,7 +157,7 @@ class App(tk.Tk):
             :return: `side effect`: checkbox event
             :rtype: None
         """
-        if self.__var.get() == 0:
+        if self._var.get() == 0:
             self._entryPassword.config(show="*")
         else:
             self._entryPassword.config(show="")
