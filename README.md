@@ -9,7 +9,7 @@
     <li><a href="https://wiki.archlinux.org/title/NetworkManager" target="blank_">NetworkManager</a></li>
     <li><a href="https://archlinux.org/packages/core/x86_64/sed/" target="blank_">sed</a></li>
     <li><a href="https://archlinux.org/packages/core/x86_64/iw/" target="blank_">iw</a></li>
-    <li><a href="https://archlinux.org/packages/core/x86_64/python/ target="blank_"">≥ Python 3.9</a></li>
+    <li><a href="https://archlinux.org/packages/core/x86_64/python/" target="blank_">≥ Python 3.9</a></li>
 </ol>
 
 <h2>Usage</h2>
