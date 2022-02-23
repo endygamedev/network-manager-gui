@@ -1,4 +1,4 @@
-TARGET = network-manager-gui 
+TARGET = network-manager-gui
 PREFIX = /usr/local/bin
 ASSETS = /usr/local/lib
 
